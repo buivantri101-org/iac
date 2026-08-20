@@ -1,0 +1,19 @@
+services:
+  grafana:
+    build: .
+    image: iac-grafana-vault:latest
+    env_file:
+      - vault.env
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - iac-net
+
+volumes:
+  grafana-data:
+
+networks:
+  iac-net:
+    external: true

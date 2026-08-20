@@ -1,0 +1,23 @@
+services:
+  vault:
+    image: hashicorp/vault:latest
+    restart: unless-stopped
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - "8200:8200"
+    environment:
+      VAULT_ADDR: "http://127.0.0.1:8200"
+    volumes:
+      - ./config:/vault/config
+      - vault-data:/vault/file
+    command: server
+    networks:
+      - iac-net
+
+volumes:
+  vault-data:
+
+networks:
+  iac-net:
+    external: true

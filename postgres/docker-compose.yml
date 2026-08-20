@@ -1,0 +1,20 @@
+services:
+  postgres:
+    build: .
+    image: iac-postgres-vault:latest
+    restart: unless-stopped
+    env_file:
+      - vault.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - iac-net
+
+volumes:
+  postgres-data:
+
+networks:
+  iac-net:
+    external: true

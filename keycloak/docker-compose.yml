@@ -1,0 +1,21 @@
+services:
+  keycloak:
+    build: .
+    image: iac-keycloak-vault:latest
+    restart: unless-stopped
+    command: start-dev
+    env_file:
+      - vault.env
+    ports:
+      - "8081:8080"
+    volumes:
+      - keycloak-data:/opt/keycloak/data
+    networks:
+      - iac-net
+
+volumes:
+  keycloak-data:
+
+networks:
+  iac-net:
+    external: true

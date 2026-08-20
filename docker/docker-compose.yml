@@ -1,0 +1,6 @@
+services:
+  nginx:
+    build: .
+    image: iac-nginx-test:latest
+    ports:
+      - "8080:80"
